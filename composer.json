@@ -1,0 +1,31 @@
+{
+  "name": "francoism90/slim3-install",
+  "description": "Simple Slim Framework 3.",
+  "keywords": ["slim", "framework", "install"],
+  "homepage": "https://github.com/francoism90/slim3-install",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Francois Menning",
+      "email": "f.menning@gmail.com",
+      "homepage": "http://example.com",
+      "role": "Developer"
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/src"
+    }
+  },
+
+  "require": {
+    "php": ">=7.0.0",
+    "slim/slim": "3.1.*",
+    "slim/csrf": "0.6.*",
+    "slim/pdo": "1.9.*",
+    "slim/logger": "0.1.*",
+    "slim/twig-view": "2.0.*",
+    "slim/http-cache": "0.3.*"
+  }
+}
