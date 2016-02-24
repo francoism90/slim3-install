@@ -22,10 +22,11 @@
   "require": {
     "php": ">=7.0.0",
     "slim/slim": "3.1.*",
-    "slim/csrf": "0.6.*",
     "slim/pdo": "1.9.*",
     "slim/logger": "0.1.*",
     "slim/twig-view": "2.0.*",
-    "slim/http-cache": "0.3.*"
+    "slim/http-cache": "0.3.*",
+    "volnix/csrf": "1.2.*",
+    "vlucas/valitron": "1.2.*"
   }
 }

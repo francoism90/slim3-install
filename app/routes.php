@@ -1,4 +1,7 @@
 <?php
+//if (php_sapi_name() === 'cli')
+  //exit($c['App\CLI']);
+
 // Home
 $app->get('/', function ($request, $response, $args) {
    return $response->withRedirect('/shop/home', 301);
@@ -6,9 +9,8 @@ $app->get('/', function ($request, $response, $args) {
 
 // Shop
 $app->group('/shop', function () {
-  $this->map(['GET', 'POST', 'DELETE', 'PATCH', 'PUT'], '', function ($request, $response, $args) {
-    // REST-api
-  });
+  // Rest-Api
+  $this->map(['POST', 'DELETE', 'PATCH', 'PUT'], '', 'App\Shop:process');
 
   $this->get('/{req:[a-z]+}', 'App\Shop:dispatch')->setName('shop');
 });

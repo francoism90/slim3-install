@@ -1,22 +1,34 @@
 <?php
+// Init Session
+session_start();
+
+// Constant
+define('ROOT', dirname(__DIR__));
+define('APP',  ROOT . '/app');
+define('CONF', APP . '/config');
+
 // Autoloader
-require_once dirname(__DIR__ ) . '/vendor/autoload.php';
+require_once ROOT . '/vendor/autoload.php';
 
 // Init Slim
-$app = new \Slim\App(include 'settings.php');
-$c = $app->getContainer();
+$c = new \Slim\Container(include 'settings.php');
+$app = new \Slim\App($c);
 
-// Init Dependencies
+// Containers
 $c['pdo'] = function ($c) {
-  $settings = $c['settings'];
   $ref = new \ReflectionClass('\Slim\PDO\Database');
-  return $ref->newInstanceArgs($settings['pdo']);
+  return $ref->newInstanceArgs($c['settings']['pdo']);
 };
 
+// View
 $c['view'] = function ($c) {
-  $settings = $c['settings'];
-  $view = new \Slim\Views\Twig($settings['view']['tpl_path'], $settings['view']['twig']);
+  $view = new \Slim\Views\Twig($c['settings']['view']['tpl_path'], $c['settings']['view']['twig']);
   $view->addExtension(new \Slim\Views\TwigExtension($c['router'], $c['request']->getUri()));
+
+  // Add globals
+  $twig = $view->getEnvironment();
+  $twig->addGlobal('gl', include CONF . '/globals.php');
+
   return $view;
 };
 
